@@ -29,6 +29,9 @@
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="baseBackgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="selectVideoDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zTn-oA-rbV"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgD-6J-l2q">
                                         <rect key="frame" x="0.0" y="71" width="290" height="50"/>
