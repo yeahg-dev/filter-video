@@ -9,11 +9,24 @@ import AVKit
 import MobileCoreServices
 import UIKit
 
-class MenuViewController: UIViewController {
+class MenuViewController: UIViewController, UINavigationControllerDelegate {
 
+    @IBOutlet weak var nameTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        configureNameTextField()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        nameTextField.resignFirstResponder()
+    }
+    
+    private func configureNameTextField() {
+        nameTextField.attributedPlaceholder = NSAttributedString(
+            string: "Birthday boy/girl name",
+            attributes: [.foregroundColor: UIColor.systemGray])
+        nameTextField.delegate = self
     }
 
     @IBAction func selectVideoDidTapped(_ sender: UIButton) {
@@ -30,6 +43,7 @@ class MenuViewController: UIViewController {
 }
 
 extension MenuViewController: UIImagePickerControllerDelegate {
+    
     func imagePickerController(
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
@@ -48,6 +62,11 @@ extension MenuViewController: UIImagePickerControllerDelegate {
     }
 }
 
-extension MenuViewController: UINavigationControllerDelegate {
+extension MenuViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+      textField.resignFirstResponder()
+      return true
+    }
     
 }
