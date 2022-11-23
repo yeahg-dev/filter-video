@@ -15,6 +15,7 @@ struct VideoHelper {
       sourceType: UIImagePickerController.SourceType
     ) {
       guard UIImagePickerController.isSourceTypeAvailable(sourceType) else {
+          print("return")
           return
       }
 

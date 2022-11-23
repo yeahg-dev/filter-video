@@ -22,6 +22,11 @@ class MenuViewController: UIViewController {
             sourceType: .savedPhotosAlbum)
     }
     
+    @IBAction func recordVideoDidTapped(_ sender: UIButton) {
+        VideoHelper.startMediaBrowser(
+            delegate: self,
+            sourceType: .camera)
+    }
 }
 
 extension MenuViewController: UIImagePickerControllerDelegate {

@@ -43,6 +43,9 @@
                                             <fontDescription key="titleFontDescription" style="UICTFontTextStyleHeadline"/>
                                             <color key="baseBackgroundColor" red="1" green="0.57810515169999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="recordVideoDidTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5s0-19-uXz"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
