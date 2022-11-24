@@ -10,8 +10,11 @@ import MobileCoreServices
 import UIKit
 
 class MenuViewController: UIViewController, UINavigationControllerDelegate {
-
+    
     @IBOutlet weak var nameTextField: UITextField!
+    
+    private let editor = VideoEditor()
+    private var pickedURL: URL?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +31,7 @@ class MenuViewController: UIViewController, UINavigationControllerDelegate {
             attributes: [.foregroundColor: UIColor.systemGray])
         nameTextField.delegate = self
     }
-
+    
     @IBAction func selectVideoDidTapped(_ sender: UIButton) {
         VideoHelper.startMediaBrowser(
             delegate: self,
@@ -46,18 +49,30 @@ extension MenuViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(
         _ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
-    ) {
-        guard let mediaType = info[UIImagePickerController.InfoKey.mediaType] as? String,
-            mediaType == (kUTTypeMovie as String),
-            let url = info[UIImagePickerController.InfoKey.mediaURL] as? URL
-        else { return }
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
+    {
+        guard
+            let url = info[.mediaURL] as? URL,
+            let name = nameTextField.text
+        else {
+            print("Cannot get video URL")
+            return
+        }
         
+        //        showInProgress()
         dismiss(animated: true) {
-            let player = AVPlayer(url: url)
-            let playerVC = AVPlayerViewController()
-            playerVC.player = player
-            self.present(playerVC, animated: true, completion: nil)
+            self.editor.makeBirthdayCard(fromVideoAt: url, forName: name) { exportedURL in
+                //            self.showCompleted()
+                guard let exportedURL = exportedURL else {
+                    return
+                }
+                self.pickedURL = exportedURL
+                let player = AVPlayer(url: exportedURL)
+                let playerVC = AVPlayerViewController()
+                playerVC.player = player
+                self.present(playerVC, animated: true, completion: nil)
+                // TODO: - PlayerViewController로 전환
+            }
         }
     }
 }
@@ -65,8 +80,8 @@ extension MenuViewController: UIImagePickerControllerDelegate {
 extension MenuViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-      textField.resignFirstResponder()
-      return true
+        textField.resignFirstResponder()
+        return true
     }
     
 }
