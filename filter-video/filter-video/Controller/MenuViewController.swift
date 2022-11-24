@@ -66,12 +66,16 @@ extension MenuViewController: UIImagePickerControllerDelegate {
                 guard let exportedURL = exportedURL else {
                     return
                 }
-                self.pickedURL = exportedURL
-                let player = AVPlayer(url: exportedURL)
-                let playerVC = AVPlayerViewController()
-                playerVC.player = player
-                self.present(playerVC, animated: true, completion: nil)
-                // TODO: - PlayerViewController로 전환
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                guard let playerVC = storyboard.instantiateViewController(
+                    withIdentifier: "PlayerViewController") as? PlayerViewController else {
+                    print("Fail to Initialize PlayerViewController")
+                    return
+                }
+                playerVC.videoURL = exportedURL
+                self.navigationController?.pushViewController(
+                    playerVC,
+                    animated: true)
             }
         }
     }
