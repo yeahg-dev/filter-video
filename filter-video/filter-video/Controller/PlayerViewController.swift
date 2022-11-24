@@ -7,6 +7,7 @@
 
 import AVKit
 import UIKit
+import Photos
 
 class PlayerViewController: UIViewController {
     
@@ -30,12 +31,41 @@ class PlayerViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-      super.viewDidLayoutSubviews()
-      playerLayer.frame = videoView.bounds
+        super.viewDidLayoutSubviews()
+        playerLayer.frame = videoView.bounds
     }
     
     @IBAction func saveDidTapped(_ sender: UIButton) {
-        
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: self.videoURL!)
+        }) { [weak self] (isSaved, error) in
+            if isSaved {
+                print("Video saved.")
+            } else {
+                print("Cannot save video.")
+                print(error ?? "unknown error")
+            }
+            DispatchQueue.main.async {
+                self?.presentSaveSucessAlert(handler: { _ in
+                    self?.navigationController?.popViewController(animated: true)
+                })
+            }
+        }
     }
-
+    
+    private func presentSaveSucessAlert(
+        handler: @escaping (UIAlertAction) -> Void)
+    {
+        let alert = UIAlertController(
+            title: "저장 완료!",
+            message: nil,
+            preferredStyle: .alert)
+        let confirmAction = UIAlertAction(
+            title: "확인",
+            style: .default,
+            handler: handler)
+        alert.addAction(confirmAction)
+        self.present(alert, animated: true)
+    }
+    
 }
