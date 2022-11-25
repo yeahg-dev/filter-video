@@ -12,6 +12,9 @@ import UIKit
 class MenuViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var selectButton: UIButton!
+    @IBOutlet weak var recordButton: UIButton!
     
     private let editor = VideoEditor()
     private var pickedURL: URL?
@@ -32,6 +35,20 @@ class MenuViewController: UIViewController, UINavigationControllerDelegate {
         nameTextField.delegate = self
     }
     
+    private func showInProgress() {
+        activityIndicator.startAnimating()
+        view.alpha = 0.3
+        selectButton.isEnabled = false
+        recordButton.isEnabled = false
+    }
+    
+    private func showCompleted() {
+        activityIndicator.stopAnimating()
+        view.alpha = 1
+        selectButton.isEnabled = true
+        recordButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+    }
+    
     @IBAction func selectVideoDidTapped(_ sender: UIButton) {
         VideoHelper.startMediaBrowser(
             delegate: self,
@@ -43,6 +60,7 @@ class MenuViewController: UIViewController, UINavigationControllerDelegate {
             delegate: self,
             sourceType: .camera)
     }
+    
 }
 
 extension MenuViewController: UIImagePickerControllerDelegate {
@@ -51,18 +69,16 @@ extension MenuViewController: UIImagePickerControllerDelegate {
         _ picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
     {
-        guard
-            let url = info[.mediaURL] as? URL,
-            let name = nameTextField.text
-        else {
+        guard let url = info[.mediaURL] as? URL,
+              let name = nameTextField.text else {
             print("Cannot get video URL")
             return
         }
         
-        //        showInProgress()
+        showInProgress()
         dismiss(animated: true) {
             self.editor.makeBirthdayCard(fromVideoAt: url, forName: name) { exportedURL in
-                //            self.showCompleted()
+                self.showCompleted()
                 guard let exportedURL = exportedURL else {
                     return
                 }

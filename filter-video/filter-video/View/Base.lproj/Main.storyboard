@@ -83,11 +83,20 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Uvz-zc-AZ6">
+                                <rect key="frame" x="175" y="402" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="VbE-Wi-B62"/>
+                                    <constraint firstAttribute="width" constant="40" id="kvC-rU-S2k"/>
+                                </constraints>
+                                <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.0" green="0.32852089410000002" blue="0.57488495110000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="x04-hI-bhz" secondAttribute="bottom" constant="100" id="A9E-rM-svv"/>
+                            <constraint firstItem="Uvz-zc-AZ6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GFI-2i-rt7"/>
                             <constraint firstItem="hhm-GW-5EX" firstAttribute="top" secondItem="HfQ-rF-yQL" secondAttribute="bottom" constant="10" id="Iab-bI-LlF"/>
                             <constraint firstItem="HfQ-rF-yQL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="130" id="JGO-ZL-ZPN"/>
                             <constraint firstItem="XDV-tY-980" firstAttribute="trailing" secondItem="HfQ-rF-yQL" secondAttribute="trailing" id="LDR-I4-QeN"/>
@@ -97,11 +106,15 @@
                             <constraint firstItem="XDV-tY-980" firstAttribute="leading" secondItem="HfQ-rF-yQL" secondAttribute="leading" id="cIL-Mg-7YL"/>
                             <constraint firstItem="x04-hI-bhz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="nGK-2N-Mer"/>
                             <constraint firstItem="hhm-GW-5EX" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pu8-Da-3pR"/>
+                            <constraint firstItem="Uvz-zc-AZ6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="xHS-tC-07C"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="SdO-VC-THa"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Uvz-zc-AZ6" id="fU4-Lp-jWX"/>
                         <outlet property="nameTextField" destination="iId-vr-Bbw" id="7Jw-1c-CQ3"/>
+                        <outlet property="recordButton" destination="GgD-6J-l2q" id="Gka-rM-PAA"/>
+                        <outlet property="selectButton" destination="mH0-oh-dl3" id="x8o-uW-ttj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
