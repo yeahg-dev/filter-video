@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6322DB062930A90800F0B2E6 /* CardLayoutDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6322DB052930A90800F0B2E6 /* CardLayoutDesign.swift */; };
 		634CDCBA292DA50C0016CCFE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634CDCB9292DA50C0016CCFE /* AppDelegate.swift */; };
 		634CDCBC292DA50C0016CCFE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634CDCBB292DA50C0016CCFE /* SceneDelegate.swift */; };
 		634CDCBE292DA50C0016CCFE /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634CDCBD292DA50C0016CCFE /* MenuViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6322DB052930A90800F0B2E6 /* CardLayoutDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardLayoutDesign.swift; sourceTree = "<group>"; };
 		634CDCB6292DA50C0016CCFE /* filter-video.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "filter-video.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		634CDCB9292DA50C0016CCFE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		634CDCBB292DA50C0016CCFE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +47,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6322DB072930B61300F0B2E6 /* Design */ = {
+			isa = PBXGroup;
+			children = (
+				6322DB052930A90800F0B2E6 /* CardLayoutDesign.swift */,
+			);
+			path = Design;
+			sourceTree = "<group>";
+		};
 		634CDCAD292DA50C0016CCFE = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +89,7 @@
 		634CDCD0292DA5280016CCFE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6322DB072930B61300F0B2E6 /* Design */,
 				634CDCBF292DA50C0016CCFE /* Main.storyboard */,
 				634CDCC7292DA50E0016CCFE /* LaunchScreen.storyboard */,
 			);
@@ -201,6 +212,7 @@
 				634CDCBE292DA50C0016CCFE /* MenuViewController.swift in Sources */,
 				634CDCC4292DA50C0016CCFE /* filter_video.xcdatamodeld in Sources */,
 				634CDCBA292DA50C0016CCFE /* AppDelegate.swift in Sources */,
+				6322DB062930A90800F0B2E6 /* CardLayoutDesign.swift in Sources */,
 				634CDCDE292F516E0016CCFE /* PlayerViewController.swift in Sources */,
 				634CDCD8292DBD570016CCFE /* VideoHelper.swift in Sources */,
 				634CDCDC292E52480016CCFE /* VideoEditor.swift in Sources */,

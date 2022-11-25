@@ -48,6 +48,7 @@ class VideoEditor {
         // sizing
         compositionVideoTrack.preferredTransform = vidoeAssetTrack.preferredTransform
         let videoInfo = orientation(from: vidoeAssetTrack.preferredTransform)
+        let layoutOrientation = videoInfo.isPortrait ? CardLayoutDesign.portrait : CardLayoutDesign.landscape
         
         let videoSize: CGSize
         if videoInfo.isPortrait {
@@ -74,12 +75,16 @@ class VideoEditor {
             width: videoSize.width - 50,
             height: videoSize.height - 50)
         
-        addImage(to: overlayLayer, videoSize: videoSize)
+        addImage(
+            to: overlayLayer,
+            videoSize: videoSize,
+            layoutOrientation: layoutOrientation)
         
         add(
             text: "Happy Birthday,\n\(name)",
             to: overlayLayer,
-            videoSize: videoSize)
+            videoSize: videoSize,
+            layoutOrientation: layoutOrientation)
         
         addConfetti(to: overlayLayer)
         
@@ -176,26 +181,33 @@ class VideoEditor {
         return instruction
     }
     
-    private func addImage(to layer: CALayer, videoSize: CGSize) {
+    private func addImage(
+        to layer: CALayer,
+        videoSize: CGSize,
+        layoutOrientation: CardLayoutDesign)
+    {
         let image = UIImage(named: "overlay")!
         let imageLayer = CALayer()
         let aspect: CGFloat = image.size.width / image.size.height
-        let width = videoSize.width
-        let height = width / aspect
-        imageLayer.frame = CGRect(
-            x: 0,
-            y: -height * 0.15,
-            width: width,
-            height: height)
+        imageLayer.frame = layoutOrientation.imageLayerFrame(
+            videoWidth: videoSize.width,
+            videoHeight: videoSize.height,
+            imageAspect: aspect)
         imageLayer.contents = image.cgImage
         layer.addSublayer(imageLayer)
     }
     
-    private func add(text: String, to layer: CALayer, videoSize: CGSize) {
+    private func add(
+        text: String,
+        to layer: CALayer,
+        videoSize: CGSize,
+        layoutOrientation: CardLayoutDesign)
+    {
+        let fontSize = layoutOrientation.textFontSize
         let attributedText = NSAttributedString(
             string: text,
             attributes: [
-                .font: UIFont(name: "ArialRoundedMTBold", size: 60) as Any,
+                .font: UIFont(name: "ArialRoundedMTBold", size: fontSize) as Any,
                 .foregroundColor: UIColor(named: "fv-green")!,
                 .strokeColor: UIColor.white,
                 .strokeWidth: -3])
@@ -209,7 +221,7 @@ class VideoEditor {
             x: 0,
             y: videoSize.height * 0.66,
             width: videoSize.width,
-            height: 150)
+            height: 200)
         
         let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
         scaleAnimation.fromValue = 0.8
